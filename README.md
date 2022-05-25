@@ -1,6 +1,6 @@
-# flututo
+# RENTMeister
 
-A new Flutter project.
+A Flutter mobile app project to manage your tenancy and properties in leasing.
 
 ## Getting Started
 
