@@ -12,6 +12,8 @@ class Tenants extends StatefulWidget {
 class _TenantsState extends State<Tenants> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text("Tenants page ( block of Tenants and infos"),
+    );
   }
 }

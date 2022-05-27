@@ -10,6 +10,8 @@ class Tenancy extends StatefulWidget {
 class _TenancyState extends State<Tenancy> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text("Tenancy page ( block of tenancy and infos"),
+    );
   }
 }

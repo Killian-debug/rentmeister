@@ -10,14 +10,16 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return //SafeArea(
+        //child:
+        Scaffold(
       appBar: AppBar(
         title: Text("Hi Username"),
       ),
       body: Center(
         child: Text("Dashboard ( block of properties, tenancies, tenants"),
       ),
-    ));
+    );
+    //);
   }
 }

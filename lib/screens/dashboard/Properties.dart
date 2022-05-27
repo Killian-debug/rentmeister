@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
 
-// list of all properties with delete method
-class Properties extends StatefulWidget {
-  Properties({Key? key}) : super(key: key);
+// list of all PropertiesPage with delete method
+class PropertiesPage extends StatefulWidget {
+  PropertiesPage({Key? key}) : super(key: key);
 
   @override
-  State<Properties> createState() => _PropertiesState();
+  State<PropertiesPage> createState() => _PropertiesPageState();
 }
 
-class _PropertiesState extends State<Properties> {
+class _PropertiesPageState extends State<PropertiesPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: const Text("Properties"),
-      ),
-      body: const Center(
-        child: Text("Properties page ( block of properties and infos"),
-      ),
-    ));
-    ;
+    return Center(
+      child: Text("PropertiesPage page ( block of PropertiesPage and infos"),
+    );
   }
 }

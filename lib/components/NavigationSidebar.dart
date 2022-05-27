@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flututo/screens/dashboard/MyAccountPage.dart';
+import 'package:flututo/screens/dashboard/Properties.dart';
+import 'package:flututo/screens/dashboard/Tenancy.dart';
+import 'package:flututo/screens/dashboard/Tenants.dart';
 
 class NavigationSidebar extends StatefulWidget {
   final Function(int?) changePage;
@@ -20,7 +23,10 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
       child: SingleChildScrollView(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[buildHeader(context), buildMenuItems(context)]),
+            children: <Widget>[
+              buildHeader(context),
+              buildMenuItems(context),
+            ]),
       ),
     );
   }
@@ -34,7 +40,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           //close the navigation sidebar
           Navigator.pop(context);
 
-          //go to myaccount
+          //go to myaccount page
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -83,16 +89,30 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
         children: [
           ListTile(
             leading: const Icon(Icons.home),
-            title: Text('Propriétés'),
+            title: Text('Accueil'),
             onTap: () {
               widget.changePage(0);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.apartment),
+            title: Text('Propriétés'),
+            onTap: () {
+              widget.changePage(1);
             },
           ),
           ListTile(
             leading: const Icon(Icons.key),
             title: Text('Locations'),
             onTap: () {
-              widget.changePage(1);
+              widget.changePage(2);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_outline),
+            title: Text('Locataires'),
+            onTap: () {
+              widget.changePage(3);
             },
           ),
           const Divider(color: Colors.black54),
@@ -100,7 +120,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             leading: const Icon(Icons.home_repair_service_rounded),
             title: const Text('Interventions'),
             onTap: () {
-              widget.changePage(0);
+              widget.changePage(1);
             },
           ),
           ListTile(

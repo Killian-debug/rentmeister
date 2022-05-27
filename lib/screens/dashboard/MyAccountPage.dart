@@ -10,17 +10,19 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return //SafeArea(
+        //child:
+        Scaffold(
       appBar: AppBar(
-        title: const Text("Hi Username"),
+        title: Text("Hi Username"),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
           "User account page ( personal inforation about user)",
         ),
       ),
-    ));
-    ;
+    )
+        //);
+        ;
   }
 }
