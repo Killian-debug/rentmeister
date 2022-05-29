@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flututo/models/UserModel.dart';
 import 'package:flututo/screens/dashboard/Home.dart';
 import 'package:flututo/screens/guest/Auth.dart';
+import 'package:flututo/screens/guest/FormProfile.dart';
 import 'package:flututo/screens/guest/Password.dart';
 import 'package:flututo/screens/guest/Term.dart';
 import 'package:flututo/screens/services/CommonService.dart';
@@ -55,15 +56,20 @@ class _GuestScreenState extends State<GuestScreen> {
                       ))
                           .then((value) {
                         if (value.uid != null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
-                            ),
-                          );
+                          setState(() => _indexSelected = index!);
                         }
                       });
                     }
+                  })),
+          FormProfile(
+              onChangeStep: (index) => setState(() {
+                    print("okay");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ),
+                    );
                   })),
         ])));
   }

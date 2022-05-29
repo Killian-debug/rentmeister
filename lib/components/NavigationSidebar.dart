@@ -3,6 +3,7 @@ import 'package:flututo/screens/dashboard/MyAccountPage.dart';
 import 'package:flututo/screens/dashboard/Properties.dart';
 import 'package:flututo/screens/dashboard/Tenancy.dart';
 import 'package:flututo/screens/dashboard/Tenants.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 class NavigationSidebar extends StatefulWidget {
   final Function(int?) changePage;
@@ -37,9 +38,6 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
       color: Colors.blue.shade700,
       child: InkWell(
         onTap: () {
-          //close the navigation sidebar
-          Navigator.pop(context);
-
           //go to myaccount page
           Navigator.push(
             context,
@@ -91,6 +89,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             leading: const Icon(Icons.home),
             title: Text('Accueil'),
             onTap: () {
+              Navigator.pop(context);
               widget.changePage(0);
             },
           ),
@@ -98,6 +97,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             leading: const Icon(Icons.apartment),
             title: Text('Propriétés'),
             onTap: () {
+              Navigator.pop(context);
               widget.changePage(1);
             },
           ),
@@ -105,6 +105,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             leading: const Icon(Icons.key),
             title: Text('Locations'),
             onTap: () {
+              Navigator.pop(context);
               widget.changePage(2);
             },
           ),
@@ -112,6 +113,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             leading: const Icon(Icons.person_outline),
             title: Text('Locataires'),
             onTap: () {
+              Navigator.pop(context);
               widget.changePage(3);
             },
           ),

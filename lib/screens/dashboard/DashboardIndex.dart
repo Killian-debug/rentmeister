@@ -13,9 +13,9 @@ class _DashboardState extends State<Dashboard> {
     return //SafeArea(
         //child:
         Scaffold(
-      appBar: AppBar(
-        title: Text("Hi Username"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Hi Username"),
+      // ),
       body: Center(
         child: Text("Dashboard ( block of properties, tenancies, tenants"),
       ),

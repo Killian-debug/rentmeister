@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
+                print(snapshot);
                 return HomeScreen();
               }
               return GuestScreen();

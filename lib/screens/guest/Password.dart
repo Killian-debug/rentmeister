@@ -97,7 +97,7 @@ class _PasswordState extends State<Password> {
                               ? null
                               : () {
                                   if (_formKey.currentState!.validate()) {
-                                    widget.onChangeStep(null, _passWord);
+                                    widget.onChangeStep(3, _passWord);
                                   }
                                 },
                           child: Text(
