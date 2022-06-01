@@ -5,16 +5,16 @@ import 'package:flututo/components/profile_widget.dart';
 import 'package:flututo/models/user.dart';
 import 'package:flututo/models/userpreferences.dart';
 
-class ContInfo extends StatefulWidget {
-  const ContInfo({
+class MyAccountPage extends StatefulWidget {
+  const MyAccountPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  _ContInfoState createState() => _ContInfoState();
+  _MyAccountPageState createState() => _MyAccountPageState();
 }
 
-class _ContInfoState extends State<ContInfo> {
+class _MyAccountPageState extends State<MyAccountPage> {
   final bool _flag = true;
   final user = UserPreferences.myUser;
   final number = UserPreferences.myUser;

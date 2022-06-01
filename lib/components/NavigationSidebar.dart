@@ -42,7 +42,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AccountPage(),
+              builder: (context) => MyAccountPage(),
             ),
           );
         },
