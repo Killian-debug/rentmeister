@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flututo/components/textheading.dart';
+import 'package:flututo/components/ElementStyle.dart';
 
 class FormProfile extends StatefulWidget {
-  final Function(int) onChangeStep;
+  final Function() onChangeStep;
 
   const FormProfile({
     Key? key,
@@ -15,6 +15,8 @@ class FormProfile extends StatefulWidget {
 
 class _FormProfileState extends State<FormProfile> {
   final bool _flag = true;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +28,7 @@ class _FormProfileState extends State<FormProfile> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -110,7 +113,7 @@ class _FormProfileState extends State<FormProfile> {
                         _flag ? Color.fromARGB(255, 0, 47, 150) : Colors.teal,
                   ),
                   onPressed: () {
-                    widget.onChangeStep(4);
+                    widget.onChangeStep();
                   },
                   child: Text("Créer mon compte".toUpperCase()),
                 ),

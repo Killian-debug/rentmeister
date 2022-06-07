@@ -6,9 +6,9 @@ import 'package:flututo/screens/dashboard/DashboardIndex.dart';
 import 'package:flututo/screens/dashboard/Properties.dart';
 import 'package:flututo/screens/dashboard/Tenancy.dart';
 import 'package:flututo/screens/dashboard/Tenants.dart';
-import 'package:flututo/screens/dashboard/crud/PropertieCru.dart';
-import 'package:flututo/screens/dashboard/crud/TenancyCru.dart';
-import 'package:flututo/screens/dashboard/crud/TenantCru.dart';
+import 'package:flututo/screens/dashboard/crud/AddPropertie.dart';
+import 'package:flututo/screens/dashboard/crud/AddTenancy.dart';
+import 'package:flututo/screens/dashboard/crud/AddTenant.dart';
 import 'package:flututo/screens/services/UserService.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () {
-              Navigator.pop(context);
+              //Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {
-              Navigator.pop(context);
+              //  Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(

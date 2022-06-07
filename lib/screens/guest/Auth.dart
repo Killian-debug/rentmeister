@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class AuthScreen extends StatefulWidget {
   final Function(int, String) onChangeStep;
@@ -14,8 +15,12 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _email = '';
-  final RegExp emailRegex = RegExp("^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}");
+  final TextEditingController _Numcontroller = TextEditingController();
+  // String _email = '';
+  String _number = '';
+  //final RegExp emailRegex = RegExp("^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}");
+  final RegExp numRegex = RegExp("^[+][0-9]+\$");
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,20 +33,20 @@ class _AuthScreenState extends State<AuthScreen> {
             children: [
               RichText(
                 text: TextSpan(
-                  text: 'Everyone has\n'.toUpperCase(),
+                  text: 'Chacun a \n'.toUpperCase(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 30.0,
                   ),
                   children: [
                     TextSpan(
-                      text: 'knowledge'.toUpperCase(),
+                      text: 'propriété'.toUpperCase(),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextSpan(text: ' to share'.toUpperCase()),
+                    TextSpan(text: ' à partager'.toUpperCase()),
                   ],
                 ),
               ),
@@ -49,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 height: 10,
               ),
               Text(
-                'It all starts here.',
+                'Tout commence ici.',
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                 ),
@@ -62,18 +67,15 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('Enter your email'),
+                      Text('Entrez votre numéro ${_number}'),
                       SizedBox(
                         height: 10.0,
                       ),
-                      TextFormField(
-                        onChanged: (value) => setState(() => _email = value),
-                        validator: (value) =>
-                            value!.isEmpty || !emailRegex.hasMatch(value)
-                                ? 'Please enter a valide email'
-                                : null,
+                      IntlPhoneField(
+                        searchText: "Chercher le pays",
+                        invalidNumberMessage: "Numero invalide",
                         decoration: InputDecoration(
-                            hintText: 'Ex: john.doe@domaine.com',
+                            labelText: 'Numéro',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(0.0),
                               borderSide: BorderSide(
@@ -86,7 +88,44 @@ class _AuthScreenState extends State<AuthScreen> {
                                 color: Colors.grey,
                               ),
                             )),
+                        initialCountryCode: 'BJ',
+                        validator: (value) {
+                          _number = value!.completeNumber.toString();
+                          if (!numRegex.hasMatch(_number)) {
+                            return 'Entrez le numéro';
+                          }
+                          return null;
+                        },
+                        onChanged: (phone) {
+                          // (value) =>
+                          setState(
+                              () => _number = phone.completeNumber.toString());
+                          print(_number);
+                        },
+                        controller: _Numcontroller,
                       ),
+
+                      // TextFormField(
+                      //   onChanged: (value) => setState(() => _email = value),
+                      //   validator: (value) =>
+                      //       value!.isEmpty || !emailRegex.hasMatch(value)
+                      //           ? 'Please enter a valide email'
+                      //           : null,
+                      //   decoration: InputDecoration(
+                      //       hintText: 'Ex: john.doe@domaine.com',
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(0.0),
+                      //         borderSide: BorderSide(
+                      //           color: Colors.grey,
+                      //         ),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(0.0),
+                      //         borderSide: BorderSide(
+                      //           color: Colors.grey,
+                      //         ),
+                      //       )),
+                      // ),
                       SizedBox(
                         height: 30.0,
                       ),
@@ -95,16 +134,17 @@ class _AuthScreenState extends State<AuthScreen> {
                         color: Theme.of(context).primaryColor,
                         elevation: 0,
                         padding: EdgeInsets.symmetric(vertical: 15.0),
-                        onPressed: !emailRegex.hasMatch(_email)
-                            ? null
-                            : () {
-                                if (_formKey.currentState!.validate()) {
-                                  print(_email);
-                                  widget.onChangeStep(1, _email);
-                                }
-                              },
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (numRegex.hasMatch(_number)) {
+                              print('test22 $_number');
+
+                              widget.onChangeStep(1, _number);
+                            }
+                          }
+                        },
                         child: Text(
-                          'Continue'.toUpperCase(),
+                          'Continuer'.toUpperCase(),
                           style: TextStyle(
                             color: Colors.white,
                           ),

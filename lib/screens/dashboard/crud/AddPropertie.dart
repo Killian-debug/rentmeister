@@ -8,6 +8,8 @@ class addPropertiePage extends StatefulWidget {
 }
 
 class _addPropertiePageState extends State<addPropertiePage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
