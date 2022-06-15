@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             return SafeArea(
               child: Scaffold(
                 body: Center(
-                  child: Text('Loading...'),
+                  child: Text('Chargement...'),
                 ),
               ),
             );

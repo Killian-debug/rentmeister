@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../models/userpreferences.dart';
+import '../models/UserProfil.dart';
 
 AppBar buildApBar(BuildContext context) {
   const icon = CupertinoIcons.moon_stars;
-  final name = UserPreferences.myUser.name;
+  final name = UserProfil.myUser.name;
 
   return AppBar(
     title: Text(name),

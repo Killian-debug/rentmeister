@@ -85,7 +85,7 @@ class _TermState extends State<Term> {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0.0)),
-                  onPressed: _termsReaded ? () => widget.onChangeStep(2) : null,
+                  onPressed: _termsReaded ? () => widget.onChangeStep(3) : null,
                   child: Text(
                     'Accept & continue'.toUpperCase(),
                     style: TextStyle(

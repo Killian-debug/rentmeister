@@ -1,6 +1,6 @@
 import 'package:flututo/models/user.dart';
 
-class UserPreferences {
+class UserProfil {
   static const myUser = User(
       imagePath: 'assets/images/chat.png',
       name: 'christy',

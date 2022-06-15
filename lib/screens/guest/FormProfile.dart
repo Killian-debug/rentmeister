@@ -21,108 +21,110 @@ class _FormProfileState extends State<FormProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: Container(
-      margin: EdgeInsets.only(top: 0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  //height: 100,
-                  width: 800,
-                  child: Text('  Nom ', style: kaHeading),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "John ",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-                Container(
-                  //height: 100,
-                  width: 800,
-                  child: Text('Prénom ', style: kaHeading),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "baké ",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-                Container(
-                  //height: 100,
-                  width: 800,
-                  child: Text('Identifiant facebook ', style: kaHeading),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "John.coe ",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-                Container(
-                  //height: 100,
-                  width: 800,
-                  child: Text('  Numéro Whatsapp ', style: kaHeading),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "+229 62697749 ",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary:
-                        _flag ? Color.fromARGB(255, 0, 47, 150) : Colors.teal,
-                  ),
-                  onPressed: () {
-                    widget.onChangeStep();
-                  },
-                  child: Text("Créer mon compte".toUpperCase()),
-                ),
-              ],
+      child: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(
+              height: 15.0,
             ),
-          ),
-        ],
+            Container(
+              child: Text('Profil ', style: kaHeading),
+            ),
+            Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Nom', style: formLabel),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "John ",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Prénom ', style: formLabel),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "baké ",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Numéro Whatsapp ', style: formLabel),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'si différent du numéro précédent',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(100, 52.0),
+                      primary: Theme.of(context).primaryColor,
+                    ),
+                    /*padding: EdgeInsets.symmetric(
+                                  vertical: 15.0,
+                                ),*/
+                    onPressed: () {},
+                    child: Text(
+                      "Créer mon compte".toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    )));
+    ));
   }
 }
 /*

@@ -4,11 +4,11 @@ import 'package:pinput/pinput.dart';
 
 class AuthCodeScreen extends StatefulWidget {
   final Function(int, String) onChangeStep;
-  //final String phone;
+  final String phone;
   AuthCodeScreen({
     Key? key,
     required this.onChangeStep(index, phone),
-    //required this.phone,
+    required this.phone,
   }) : super(key: key);
 
   @override
@@ -17,6 +17,7 @@ class AuthCodeScreen extends StatefulWidget {
 
 class _AuthCodeScreenState extends State<AuthCodeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
@@ -41,13 +42,15 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
       appBar: AppBar(
         title: Text('Verification OTP'),
       ),
-      body: Column(
-        children: [
+      body: Form(
+        key: _formKey,
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Container(
             margin: EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                'Verifier ',
+                "Verifier " + widget.phone,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
             ),
@@ -76,7 +79,10 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
               submittedPinTheme: pinPutDecoration,
               focusedPinTheme: pinPutDecoration,
               pinAnimationType: PinAnimationType.fade,
-              onSubmitted: (pin) async {
+              // onCompleted: (pin) {
+              //   print(_pinPutController.text);
+              // },
+              onCompleted: (pin) async {
                 try {
                   await FirebaseAuth.instance
                       .signInWithCredential(PhoneAuthProvider.credential(
@@ -97,49 +103,69 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
                 }
               },
             ),
-          )
-        ],
+          ),
+          ElevatedButton(
+            // color: Theme.of(context).primaryColor,
+            // elevation: 0,
+            // padding: EdgeInsets.symmetric(vertical: 15.0),
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(100, 52.0),
+              primary: Theme.of(context).primaryColor,
+            ),
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                widget.onChangeStep(3, '');
+              }
+            },
+            child: Text(
+              'Continue'.toUpperCase(),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ]),
       ),
     );
   }
 
-  // _verifyPhone() async {
-  //   //print(widget.phone);
-  //   await FirebaseAuth.instance.verifyPhoneNumber(
-  //       phoneNumber: widget.phone,
-  //       verificationCompleted: (PhoneAuthCredential credential) async {
-  //         await FirebaseAuth.instance
-  //             .signInWithCredential(credential)
-  //             .then((value) async {
-  //           if (value.user != null) {
-  //             widget.onChangeStep(2, '');
-  //             // Navigator.pushAndRemoveUntil(
-  //             //     context,
-  //             //     MaterialPageRoute(builder: (context) => Home()),
-  //             //     (route) => false);
-  //           }
-  //         });
-  //       },
-  //       verificationFailed: (FirebaseAuthException e) {
-  //         print(e.message);
-  //       },
-  //       codeSent: (String verficationID, int? resendToken) {
-  //         setState(() {
-  //           _verificationCode = verficationID;
-  //         });
-  //       },
-  //       codeAutoRetrievalTimeout: (String verificationID) {
-  //         setState(() {
-  //           _verificationCode = verificationID;
-  //         });
-  //       },
-  //       timeout: Duration(seconds: 120));
-  // }
+  _verifyPhone() async {
+    //print(widget.phone);
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+22969782863',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) async {
+            if (value.user != null) {
+              widget.onChangeStep(2, '');
+              // Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => Home()),
+              //     (route) => false);
+            }
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print(e.message);
+        },
+        codeSent: (String verficationID, int? resendToken) {
+          setState(() {
+            _verificationCode = verficationID;
+          });
+        },
+        codeAutoRetrievalTimeout: (String verificationID) {
+          setState(() {
+            _verificationCode = verificationID;
+          });
+        },
+        timeout: Duration(seconds: 120));
+  }
 
   // @override
   // void initState() {
   //   // TODO: implement initState
   //   super.initState();
-  //  // _verifyPhone();
+  //   _verifyPhone();
   // }
 }

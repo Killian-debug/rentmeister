@@ -25,7 +25,7 @@ class _GuestScreenState extends State<GuestScreen> {
   List<Widget> _widget = [];
 
   int _indexSelected = 0;
-  late String _number;
+  String number = '';
   late String _verificationCode;
 
   @override
@@ -37,39 +37,42 @@ class _GuestScreenState extends State<GuestScreen> {
           AuthScreen(
             onChangeStep: (index, value) => setState(() {
               _indexSelected = index;
-              _number = value;
             }),
           ),
           AuthCodeScreen(
-            //phone: _number,
-            onChangeStep: (index, number) {
-              print('test $number');
-              FirebaseAuth.instance.verifyPhoneNumber(
-                  phoneNumber: number,
-                  verificationCompleted:
-                      (PhoneAuthCredential credential) async {
-                    await FirebaseAuth.instance
-                        .signInWithCredential(credential)
-                        .then((value) async {
-                      if (value.user != null) {
-                        _indexSelected = index;
-                      }
-                    });
-                  },
-                  verificationFailed: (FirebaseAuthException e) {
-                    print(e.message);
-                  },
-                  codeSent: (String verficationID, int? resendToken) {
-                    setState(() {
-                      _verificationCode = verficationID;
-                    });
-                  },
-                  codeAutoRetrievalTimeout: (String verificationID) {
-                    setState(() {
-                      _verificationCode = verificationID;
-                    });
-                  },
-                  timeout: Duration(seconds: 120));
+            phone: number,
+            onChangeStep: (index, value) {
+              print('test $value');
+              setState(() {
+                _indexSelected = index;
+              });
+              // FirebaseAuth.instance.verifyPhoneNumber(
+              //     phoneNumber: '+22969782863',
+              //     verificationCompleted:
+              //         (PhoneAuthCredential credential) async {
+              //       await FirebaseAuth.instance
+              //           .signInWithCredential(credential)
+              //           .then((value) async {
+              //         // if (value.user != null) {}
+              //         setState(() {
+              //           _indexSelected = index;
+              //         });
+              //       });
+              //     },
+              //     verificationFailed: (FirebaseAuthException e) {
+              //       print(e.message);
+              //     },
+              //     codeSent: (String verficationID, int? resendToken) {
+              //       setState(() {
+              //         _verificationCode = verficationID;
+              //       });
+              //     },
+              //     codeAutoRetrievalTimeout: (String verificationID) {
+              //       setState(() {
+              //         _verificationCode = verificationID;
+              //       });
+              //     },
+              //     timeout: Duration(seconds: 120));
             },
           ),
           Term(

@@ -17,7 +17,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _Numcontroller = TextEditingController();
   // String _email = '';
-  String _number = '';
+  String number = '';
   //final RegExp emailRegex = RegExp("^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}");
   final RegExp numRegex = RegExp("^[+][0-9]+\$");
 
@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
             children: [
               RichText(
                 text: TextSpan(
-                  text: 'Chacun a \n'.toUpperCase(),
+                  text: 'Chacun a une\n'.toUpperCase(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 30.0,
@@ -67,7 +67,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('Entrez votre numéro ${_number}'),
+                      Text('Entrez votre numéro ${number}'),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -90,8 +90,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             )),
                         initialCountryCode: 'BJ',
                         validator: (value) {
-                          _number = value!.completeNumber.toString();
-                          if (!numRegex.hasMatch(_number)) {
+                          number = value!.completeNumber.toString();
+                          if (!numRegex.hasMatch(number)) {
                             return 'Entrez le numéro';
                           }
                           return null;
@@ -99,8 +99,8 @@ class _AuthScreenState extends State<AuthScreen> {
                         onChanged: (phone) {
                           // (value) =>
                           setState(
-                              () => _number = phone.completeNumber.toString());
-                          print(_number);
+                              () => number = phone.completeNumber.toString());
+                          print(number);
                         },
                         controller: _Numcontroller,
                       ),
@@ -136,10 +136,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         padding: EdgeInsets.symmetric(vertical: 15.0),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            if (numRegex.hasMatch(_number)) {
-                              print('test22 $_number');
+                            if (numRegex.hasMatch(number)) {
+                              print('test22 $number');
 
-                              widget.onChangeStep(1, _number);
+                              widget.onChangeStep(1, number);
                             }
                           }
                         },

@@ -3,7 +3,7 @@ import 'package:flututo/components/ButtonWidget.dart';
 import 'package:flututo/components/pappbar.dart';
 import 'package:flututo/components/profile_widget.dart';
 import 'package:flututo/models/user.dart';
-import 'package:flututo/models/userpreferences.dart';
+import 'package:flututo/models/UserProfil.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({
@@ -16,8 +16,8 @@ class MyAccountPage extends StatefulWidget {
 
 class _MyAccountPageState extends State<MyAccountPage> {
   final bool _flag = true;
-  final user = UserPreferences.myUser;
-  final number = UserPreferences.myUser;
+  final user = UserProfil.myUser;
+  final number = UserProfil.myUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
