@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flututo/components/ButtonWidget.dart';
 import 'package:flututo/components/pappbar.dart';
 import 'package:flututo/components/profile_widget.dart';
-import 'package:flututo/models/user.dart';
+import 'package:flututo/models/UserModel.dart';
 import 'package:flututo/models/UserProfil.dart';
 
 class MyAccountPage extends StatefulWidget {
@@ -16,8 +16,8 @@ class MyAccountPage extends StatefulWidget {
 
 class _MyAccountPageState extends State<MyAccountPage> {
   final bool _flag = true;
-  final user = UserProfil.myUser;
-  final number = UserProfil.myUser;
+  final user = myUser;
+  final number = myUser.telUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +28,14 @@ class _MyAccountPageState extends State<MyAccountPage> {
           children: [
             buildName(user),
             ProfileWidget(
-              imagePath: user.imagePath,
+              imagePath: '',
               onClicked: () async {},
             ),
 
             const SizedBox(height: 24),
             Center(
               child: Text(
-                user.number,
+                number,
                 style: TextStyle(fontSize: 21),
               ),
             ),
@@ -102,11 +102,11 @@ class _MyAccountPageState extends State<MyAccountPage> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName(UserModel user) => Column(
         children: [
           // nom de lutilisteur
           Text(
-            user.name,
+            user.nomUser,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
 

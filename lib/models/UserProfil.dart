@@ -1,12 +1,9 @@
-import 'package:flututo/models/user.dart';
+import 'package:flututo/models/UserModel.dart';
 
-class UserProfil {
-  static const myUser = User(
-      imagePath: 'assets/images/chat.png',
-      name: 'christy',
-      email: 'christyfekdf@gmail.com',
-      number: '(707) 235-0111',
-      about:
-          'i love jesus i am a woman from zion we dont beg in our familly we are on charge',
-      isDarkMode: false);
-}
+UserModel myUser = UserModel(
+  nomUser: 'Amos',
+  preUser: 'Killian',
+  mailUser: 'maos@gmail.com',
+  telUser: '+22969782863',
+  imagePath: 'assets/profilKillian.png',
+);

@@ -40,3 +40,8 @@ const TextStyle buttonStyle = TextStyle(
   color: Colors.white,
   fontFamily: 'roboto',
 );
+
+const TextStyle accent = TextStyle(
+  color: Colors.black,
+  fontSize: 14.0,
+);
