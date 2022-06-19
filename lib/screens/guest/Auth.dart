@@ -137,8 +137,6 @@ class _AuthScreenState extends State<AuthScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             if (numRegex.hasMatch(number)) {
-                              print('test22 $number');
-
                               widget.onChangeStep(1, number);
                             }
                           }

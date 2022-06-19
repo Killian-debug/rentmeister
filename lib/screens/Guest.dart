@@ -22,10 +22,10 @@ class _GuestScreenState extends State<GuestScreen> {
   UserService _userService = UserService();
   CommonService _commonService = CommonService();
 
-  List<Widget> _widget = [];
+  List<Widget> _widgets = [];
 
   int _indexSelected = 0;
-  String number = '';
+
   late String _verificationCode;
 
   @override
@@ -33,46 +33,25 @@ class _GuestScreenState extends State<GuestScreen> {
     // TODO: implement initState
     super.initState();
 
-    _commonService.terms.then((terms) => setState(() => _widget.addAll([
+    _commonService.terms.then((terms) => setState(() => _widgets.addAll([
           AuthScreen(
             onChangeStep: (index, value) => setState(() {
+              print('VALue : ' + value);
+              AuthCodeScreen.phone = value;
               _indexSelected = index;
             }),
           ),
           AuthCodeScreen(
-            phone: number,
-            onChangeStep: (index, value) {
-              print('test $value');
-              setState(() {
-                _indexSelected = index;
+            onChangeStep: (index, user) {
+              print('authcode check ');
+
+              _userService.save(user).then((value) {
+                if (value.uid != null) {
+                  print("le numcheck ");
+                  setState(() => _indexSelected = index);
+                }
               });
-              // FirebaseAuth.instance.verifyPhoneNumber(
-              //     phoneNumber: '+22969782863',
-              //     verificationCompleted:
-              //         (PhoneAuthCredential credential) async {
-              //       await FirebaseAuth.instance
-              //           .signInWithCredential(credential)
-              //           .then((value) async {
-              //         // if (value.user != null) {}
-              //         setState(() {
-              //           _indexSelected = index;
-              //         });
-              //       });
-              //     },
-              //     verificationFailed: (FirebaseAuthException e) {
-              //       print(e.message);
-              //     },
-              //     codeSent: (String verficationID, int? resendToken) {
-              //       setState(() {
-              //         _verificationCode = verficationID;
-              //       });
-              //     },
-              //     codeAutoRetrievalTimeout: (String verificationID) {
-              //       setState(() {
-              //         _verificationCode = verificationID;
-              //       });
-              //     },
-              //     timeout: Duration(seconds: 120));
+              //store registration details in firestore database
             },
           ),
           Term(
@@ -100,23 +79,33 @@ class _GuestScreenState extends State<GuestScreen> {
           //           }
           //         })),
           FormProfile(
-              onChangeStep: () => setState(() {
-                    print("okay");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      ),
-                    );
-                  })),
+            onChangeStep: (user) => setState(
+              () {
+                print("okay");
+                if (user != null) {
+                  _userService.save(user).then((value) {
+                    if (value.uid != null) {
+                      print("ca passe");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    }
+                  });
+                }
+              },
+            ),
+          ),
         ])));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _widget.isEmpty
-          ? const SafeArea(
+      child: _widgets.isEmpty
+          ? SafeArea(
               child: Scaffold(
               body: Center(
                 child: //Text('Chargement.. .')
@@ -126,7 +115,7 @@ class _GuestScreenState extends State<GuestScreen> {
                 ),
               ),
             ))
-          : _widget.elementAt(_indexSelected),
+          : _widgets.elementAt(_indexSelected),
     );
   }
 }

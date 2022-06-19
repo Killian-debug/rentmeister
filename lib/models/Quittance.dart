@@ -1,22 +1,22 @@
-class HouseModel {
-  String idMai;
-  String idPro;
-  String modele;
-  int occupant;
+class factModel {
+  String idFact;
+  String datEmi;
+  String datPay;
+  int montant;
+  String idLoc;
 
-  HouseModel({
-    this.idMai = '',
-    required this.idPro,
-    required this.modele,
-    required this.occupant,
-  });
+  factModel(
+      {this.idFact = '',
+      required this.datEmi,
+      required this.datPay,
+      required this.montant,
+      required this.idLoc});
 
   Map<String, dynamic> toJson() => {
-        'idMai': idMai,
-        'idPro': idPro,
-        'modele': modele,
-        'occupant': occupant,
+        'idFact': idFact,
+        'idLoc': idLoc,
+        'dateEmi': datEmi,
+        'datPay': datPay,
+        'montant': montant,
       };
-
-  Future<void> deleteHouse(idMai) async {}
 }

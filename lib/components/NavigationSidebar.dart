@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flututo/screens/Guest.dart';
 import 'package:flututo/screens/dashboard/MyAccountPage.dart';
 import 'package:flututo/screens/dashboard/Properties.dart';
 import 'package:flututo/screens/dashboard/Tenancy.dart';
 import 'package:flututo/screens/dashboard/Tenants.dart';
+import 'package:flututo/screens/services/UserService.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
 class NavigationSidebar extends StatefulWidget {
@@ -18,6 +20,8 @@ class NavigationSidebar extends StatefulWidget {
 }
 
 class _NavigationSidebarState extends State<NavigationSidebar> {
+  UserService _userService = UserService();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -127,9 +131,16 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           ),
           ListTile(
             leading: const Icon(Icons.home_max_outlined),
-            title: const Text('Autres'),
-            onTap: () {
-              widget.changePage(0);
+            title: const Text('Déconnexion'),
+            onTap: () async {
+              await _userService.logout();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GuestScreen(),
+                ),
+                (route) => false,
+              );
             },
           ),
         ],

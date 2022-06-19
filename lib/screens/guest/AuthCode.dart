@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flututo/models/UserModel.dart';
 import 'package:pinput/pinput.dart';
 
 class AuthCodeScreen extends StatefulWidget {
-  final Function(int, String) onChangeStep;
-  final String phone;
+  final Function(int, UserModel) onChangeStep;
+  static String phone = "";
   AuthCodeScreen({
     Key? key,
     required this.onChangeStep(index, phone),
-    required this.phone,
   }) : super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
             margin: EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                "Verifier " + widget.phone,
+                "Verifier " + AuthCodeScreen.phone,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
             ),
@@ -85,15 +85,24 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
               onCompleted: (pin) async {
                 try {
                   await FirebaseAuth.instance
-                      .signInWithCredential(PhoneAuthProvider.credential(
-                          verificationId: _verificationCode, smsCode: pin))
+                      .signInWithCredential(
+                    PhoneAuthProvider.credential(
+                      verificationId: _verificationCode,
+                      smsCode: pin,
+                    ),
+                  )
                       .then((value) async {
                     if (value.user != null) {
                       // Navigator.pushAndRemoveUntil(
                       //     context,
                       //     MaterialPageRoute(builder: (context) => Home()),
                       //     (route) => false);
-                      widget.onChangeStep(2, '');
+                      print(value);
+                      widget.onChangeStep(
+                          2,
+                          UserModel(
+                            telUser: AuthCodeScreen.phone,
+                          ));
                     }
                   });
                 } catch (e) {
@@ -104,26 +113,26 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
               },
             ),
           ),
-          ElevatedButton(
-            // color: Theme.of(context).primaryColor,
-            // elevation: 0,
-            // padding: EdgeInsets.symmetric(vertical: 15.0),
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(100, 52.0),
-              primary: Theme.of(context).primaryColor,
-            ),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                widget.onChangeStep(3, '');
-              }
-            },
-            child: Text(
-              'Continue'.toUpperCase(),
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
+          // ElevatedButton(
+          //   // color: Theme.of(context).primaryColor,
+          //   // elevation: 0,
+          //   // padding: EdgeInsets.symmetric(vertical: 15.0),
+          //   style: ElevatedButton.styleFrom(
+          //     fixedSize: Size(100, 52.0),
+          //     primary: Theme.of(context).primaryColor,
+          //   ),
+          //   onPressed: () {
+          //     if (_formKey.currentState!.validate()) {
+          //       widget.onChangeStep(3, '');
+          //     }
+          //   },
+          //   child: Text(
+          //     'Continue'.toUpperCase(),
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          // ),
         ]),
       ),
     );
@@ -131,18 +140,19 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
 
   _verifyPhone() async {
     //print(widget.phone);
+    String number = AuthCodeScreen.phone;
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+22969782863',
+        phoneNumber: number,
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              widget.onChangeStep(2, '');
-              // Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => Home()),
-              //     (route) => false);
+              widget.onChangeStep(
+                  2,
+                  UserModel(
+                    telUser: AuthCodeScreen.phone,
+                  ));
             }
           });
         },
@@ -162,10 +172,10 @@ class _AuthCodeScreenState extends State<AuthCodeScreen> {
         timeout: Duration(seconds: 120));
   }
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _verifyPhone();
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _verifyPhone();
+  }
 }

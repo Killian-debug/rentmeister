@@ -1,18 +1,18 @@
 class UserModel {
   String uid = '';
-  String preUser;
-  String nomUser;
+  String? preUser;
+  String? nomUser;
   String telUser;
-  String mailUser;
-  String imagePath;
+  String? mailUser;
+  String? imagePath;
 
   UserModel({
     this.uid = '',
-    required this.nomUser,
-    required this.preUser,
+    this.nomUser,
+    this.preUser,
     required this.telUser,
-    required this.mailUser,
-    required this.imagePath,
+    this.mailUser,
+    this.imagePath,
   });
 
   set setUid(value) => uid = value;

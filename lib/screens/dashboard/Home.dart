@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton:
             dashboardComponent(context)[currentPageIndex].floatingActionButton,
         body: PageView.builder(
+          physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           itemBuilder: (context, index) =>
               dashboardComponent(context)[index].body,

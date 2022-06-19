@@ -106,7 +106,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
         children: [
           // nom de lutilisteur
           Text(
-            user.nomUser,
+            user.nomUser!,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
 

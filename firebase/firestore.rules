@@ -7,7 +7,7 @@ service cloud.firestore {
     match /common/terms {
       allow read: if true;
     }
-    match /userprofil/{document=**}{
+    match /utilisateur/{document=**}{
       allow read, write: if true;
     }
   }

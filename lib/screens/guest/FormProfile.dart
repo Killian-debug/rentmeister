@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flututo/components/ElementStyle.dart';
+import 'package:flututo/models/UserModel.dart';
+import 'package:flututo/screens/guest/AuthCode.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class FormProfile extends StatefulWidget {
-  final Function() onChangeStep;
+  final Function(UserModel) onChangeStep;
 
   const FormProfile({
     Key? key,
@@ -14,8 +17,14 @@ class FormProfile extends StatefulWidget {
 }
 
 class _FormProfileState extends State<FormProfile> {
-  final bool _flag = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TextEditingController nomController = TextEditingController();
+  final TextEditingController preController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController whaController = TextEditingController();
+  final RegExp emailRegex = RegExp("^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}");
+  final RegExp numRegex = RegExp("^[+][0-9]+\$");
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +45,7 @@ class _FormProfileState extends State<FormProfile> {
               child: Text('Profil ', style: kaHeading),
             ),
             Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -47,6 +57,7 @@ class _FormProfileState extends State<FormProfile> {
                     height: 5.0,
                   ),
                   TextFormField(
+                    controller: nomController,
                     decoration: InputDecoration(
                       labelText: "John ",
                       border: OutlineInputBorder(
@@ -67,6 +78,7 @@ class _FormProfileState extends State<FormProfile> {
                     height: 5.0,
                   ),
                   TextFormField(
+                    controller: preController,
                     decoration: InputDecoration(
                       labelText: "baké ",
                       border: OutlineInputBorder(
@@ -82,13 +94,17 @@ class _FormProfileState extends State<FormProfile> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  Text('Numéro Whatsapp ', style: formLabel),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Email ', style: formLabel),
                   SizedBox(
                     height: 5.0,
                   ),
                   TextFormField(
+                    controller: emailController,
                     decoration: InputDecoration(
-                      labelText: 'si différent du numéro précédent',
+                      labelText: 'john.doe@gmail.com',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(0.0),
                         borderSide: BorderSide(color: Colors.black),
@@ -98,9 +114,11 @@ class _FormProfileState extends State<FormProfile> {
                         borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
+                    validator: (value) {
+                      !emailRegex.hasMatch(emailController.text)
+                          ? "Veuillez entrer un mail valide"
+                          : null;
+                    },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -110,7 +128,15 @@ class _FormProfileState extends State<FormProfile> {
                     /*padding: EdgeInsets.symmetric(
                                   vertical: 15.0,
                                 ),*/
-                    onPressed: () {},
+                    onPressed: () {
+                      //créer l'user model
+                      widget.onChangeStep(UserModel(
+                        telUser: AuthCodeScreen.phone,
+                        nomUser: nomController.text.trim(),
+                        preUser: preController.text.trim(),
+                        mailUser: emailController.text.trim(),
+                      ));
+                    },
                     child: Text(
                       "Créer mon compte".toUpperCase(),
                       style: TextStyle(

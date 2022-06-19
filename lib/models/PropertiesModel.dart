@@ -1,20 +1,21 @@
 class PropertieModel {
   String idPro = '';
   String refPro;
-  String descPro;
-  String type;
-  String statut;
-  String adresse;
-  String proprietaire;
+  String? descPro;
+  String? type;
+  String? statut;
+  String? adresse;
+  String? proprietaire;
 
   PropertieModel({
     this.idPro = '',
     required this.refPro,
-    required this.descPro,
-    required this.type,
-    required this.statut,
-    required this.adresse,
-    required this.proprietaire,
+    this.descPro,
+    this.type,
+    this.statut,
+    this.adresse,
+    this.proprietaire,
+    String desPro,
   });
 
   Map<String, dynamic> toJson() => {
@@ -26,5 +27,13 @@ class PropertieModel {
         'proprietaire': proprietaire
       };
 
-  Future<void> deletePropertie(idPro) async {}
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map["refPro"] = refPro;
+    return map;
+  }
+
+  fromMap(dynamic obj) {
+    this.refPro = obj['refpro'];
+  }
 }

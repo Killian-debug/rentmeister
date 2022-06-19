@@ -8,7 +8,7 @@ AppBar buildApBar(BuildContext context) {
   final name = myUser.nomUser;
 
   return AppBar(
-    title: Text(name),
+    title: Text(name!),
     leading: BackButton(color: Colors.black),
     backgroundColor: Colors.transparent,
     elevation: 0,

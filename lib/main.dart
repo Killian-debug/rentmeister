@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Sweet Colo',
+        title: 'RENTmeister',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                print(snapshot);
+                print(snapshot.data);
                 return HomeScreen();
               }
               return GuestScreen();
