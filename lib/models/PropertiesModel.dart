@@ -15,7 +15,6 @@ class PropertieModel {
     this.statut,
     this.adresse,
     this.proprietaire,
-    String desPro,
   });
 
   Map<String, dynamic> toJson() => {

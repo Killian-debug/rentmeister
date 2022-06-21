@@ -4,25 +4,25 @@ import 'package:flutter/services.dart';
 
 List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> intvState = [
-    DropdownMenuItem(child: Text("Crée"), value: "creer"),
-    DropdownMenuItem(child: Text("En cours"), value: "en-cours"),
-    DropdownMenuItem(child: Text("Terminé"), value: "termine"),
+    DropdownMenuItem(child: Text("Bon"), value: "bon"),
+    DropdownMenuItem(child: Text("Moyen"), value: "moyen"),
+    DropdownMenuItem(child: Text("En panne"), value: "en-panne"),
   ];
   return intvState;
 }
 
-class addInterventionPage extends StatefulWidget {
-  addInterventionPage({Key? key}) : super(key: key);
+class addEquipement extends StatefulWidget {
+  addEquipement({Key? key}) : super(key: key);
 
   @override
-  State<addInterventionPage> createState() => _addInterventionPageState();
+  State<addEquipement> createState() => _addEquipementState();
 }
 
-class _addInterventionPageState extends State<addInterventionPage> {
+class _addEquipementState extends State<addEquipement> {
   ScrollController _controller = ScrollController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String selectedValue = "creer";
+  String selectedValue = "bon";
   int _coutRep = 0;
 
   @override
@@ -30,7 +30,7 @@ class _addInterventionPageState extends State<addInterventionPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: Text('Créer une Intervention'),
+        title: Text('Enregistrer un bien'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -38,7 +38,7 @@ class _addInterventionPageState extends State<addInterventionPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Enregistrer une intervention"),
+              Text("Enregistrer un bien"),
               SizedBox(
                 height: 15.0,
               ),
@@ -50,13 +50,13 @@ class _addInterventionPageState extends State<addInterventionPage> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Text('Titre', style: formLabel),
+                    Text('Nom', style: formLabel),
                     SizedBox(
                       height: 5.0,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Changement de lampe ",
+                        labelText: "lampe cuisine",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(0.0),
                           borderSide: BorderSide(color: Colors.black),
@@ -70,15 +70,27 @@ class _addInterventionPageState extends State<addInterventionPage> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Text('Description ', style: formLabel),
+                    Text('Etat ', style: formLabel),
                     SizedBox(
                       height: 5.0,
+                    ),
+                    DropdownButton(
+                        value: selectedValue,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedValue = newValue!;
+                          });
+                        },
+                        items: dropdownItems),
+                    Text('Infos supplémentaire ', style: formLabel),
+                    SizedBox(
+                      height: 20.0,
                     ),
                     TextFormField(
                       minLines: 3,
                       decoration: InputDecoration(
                         labelText:
-                            "réparation de la lampe grillée de la cuisine ",
+                            "La lampe grillée puis réparé de la cuisine ",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(0.0),
                           borderSide: BorderSide(color: Colors.black),
@@ -88,51 +100,6 @@ class _addInterventionPageState extends State<addInterventionPage> {
                           borderSide: BorderSide(color: Colors.black),
                         ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text('Cout de la réparation ', style: formLabel),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            TextFormField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]')),
-                              ],
-                              decoration: InputDecoration(
-                                labelText: "En Fcfa",
-                                hintText: "30000",
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text('Etat de l\'intervention', style: formLabel),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            DropdownButton(
-                                value: selectedValue,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedValue = newValue!;
-                                  });
-                                },
-                                items: dropdownItems),
-                          ],
-                        )
-                      ],
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(

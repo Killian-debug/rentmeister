@@ -4,10 +4,9 @@ import 'package:flututo/components/ElementStyle.dart';
 
 List<DropdownMenuItem<String>> get propertiesItems {
   List<DropdownMenuItem<String>> freeProperties = [
-    DropdownMenuItem(child: Text("Choisir"), value: ''),
-    DropdownMenuItem(child: Text("Crée"), value: "creer"),
-    DropdownMenuItem(child: Text("En cours"), value: "en-cours"),
-    DropdownMenuItem(child: Text("Terminé"), value: "termine"),
+    DropdownMenuItem(child: Text("Maison1"), value: "Maison1"),
+    DropdownMenuItem(child: Text("Maisone2"), value: "Maisone2"),
+    DropdownMenuItem(child: Text("Duplex2"), value: "Duplex2"),
   ];
   return freeProperties;
 }
@@ -79,6 +78,32 @@ class _addTenancyPageState extends State<addTenancyPage> {
                 hintText: "30000",
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                print('Nouvelle location');
+
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Nouvelle location'),
+                    content:
+                        const Text('Cette location est désormais enregistrée.'),
+                    actions: <Widget>[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.teal,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context, 'okay');
+                        },
+                        child: Text("OKAY".toUpperCase()),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Text('Enregistrer'),
+            )
           ],
         ),
       ),

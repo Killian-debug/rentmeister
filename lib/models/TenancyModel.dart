@@ -3,9 +3,9 @@ class TenancyModel {
   String locataire;
   String maison;
   String loyer;
-  String dateEntre;
-  String dateSortie;
-  String bail;
+  DateTime dateEntre;
+  DateTime? dateSortie;
+  //String bail;
 
   TenancyModel({
     this.idLoc = '',
@@ -13,8 +13,8 @@ class TenancyModel {
     required this.maison,
     required this.loyer,
     required this.dateEntre,
-    required this.dateSortie,
-    required this.bail,
+    this.dateSortie,
+    //required this.bail,
   });
 
   Map<String, dynamic> toJson() => {
@@ -24,7 +24,7 @@ class TenancyModel {
         'loyer': loyer,
         'dateEntre': dateEntre,
         'dateSortie': dateSortie,
-        'bail': bail,
+        //'bail': bail,
       };
 
   Future<void> deleteTenancy(idLoc) async {}
